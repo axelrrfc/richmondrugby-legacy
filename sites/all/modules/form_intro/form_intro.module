@@ -1,0 +1,57 @@
+<?php
+// $Id: $
+
+function form_intro_menu() {
+    $items = array();
+    $items ['quiz'] = array(
+      'title' => t('Super Cool Quiz'),
+      'page callback' => 'quiz_page',
+      'access arguments' => array('access content'),
+      'type' => MENU_SUGGESTED_ITEM,
+    );
+    return $items;
+}
+
+function quiz_page() {
+    return drupal_get_form('quiz_form');
+}
+
+function quiz_form($form_state) {
+    $form = array();
+    $form['name'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Please enter your name'),
+        '#required' => TRUE,
+    );
+    
+    $form['toast'] = array (
+        '#type' => 'radios',
+        '#title' => t('Do you like toast?'),
+        '#options' => array(t('No'), t('Yes')),
+    );
+    
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Make it so #1'),
+    );
+    
+    return $form;
+
+}
+
+function quiz_form_validate($form_id, &$form_state) {
+    $toast = $form_state['values']['toast'];
+    
+    if (!$toast) {
+        form_set_error('toast', t('You must like toast to complete this quiz'));
+    }
+}
+
+function quiz_form_submit($form_id, &$form_state) {
+    $name = $form_state['values']['name'];
+    $toast = $form_state['values']['toast'];
+    $output = t('Hi ');
+    $output .= $name;
+    $output .= t(' the form was submitted succesfully');
+    drupal_set_message($output);
+}

@@ -1,0 +1,9 @@
+; $Id: form_intro.info,v 1.4 2008/01/31 17:47:09 apsivam Exp $
+name = Form Intro
+description = The testing module called form_intro.
+core = 6.x
+; Information added by drupal.org packaging script on 2008-04-04
+version = "6.x-1.0"
+core = "6.x"
+project = "form_intro"
+datestamp = "1207327211"
